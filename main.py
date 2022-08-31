@@ -1,5 +1,9 @@
-from dataclasses import dataclass
-from enum import Enum
+from models.employee import (
+    Freelancer,
+    SalariedEmployee,
+    SalariedEmployeeWithBonus,
+    TechRecruiter,
+)
 
 """ 
     TODO: 1 - How can we remove duplicated code and split responsabilities?
@@ -13,78 +17,29 @@ from enum import Enum
 """
 
 
-class EmployeeType(Enum):
-    SalariedEmployee = 1
-    SalariedEmployeeWithBonus = 2
-    TechRecruiter = 3
-    Freelancer = 4
-
-
-@dataclass
-class Employee:
-    id: int
-    name: str
-    type: EmployeeType
-    monthly_salary: float = 0
-    bonus: float = 0
-    rate: float = 0
-    worked_hours: float = 0
-    commission: float = 0
-    recruited_candidates: float = 0
-
-    def can_go_to_conference(self):
-        if (
-            self.type == EmployeeType.Freelancer
-            or self.type == EmployeeType.TechRecruiter
-        ):
-            return False
-
-        return True
-
-    def salary(self):
-        # An employee that receives a monthly salary.
-        if self.type == EmployeeType.SalariedEmployee:
-            return self.monthly_salary
-
-        # An employee that receives a monthly salary AND a monthly bonus.
-        if self.type == EmployeeType.SalariedEmployeeWithBonus:
-            return self.bonus + self.monthly_salary
-
-        # A third party that provide recruiting services. It receices a montlhy salary and a comission per recruited candidate.
-        if self.type == EmployeeType.TechRecruiter:
-            return self.commission * self.recruited_candidates + self.monthly_salary
-
-        # A third party that is paid per worked hours at a flat rate.
-        if self.type == EmployeeType.Freelancer:
-            return self.rate * self.worked_hours
-
-
-def get_collaborators():
+def get_collaborator():
     """Mocks a database call."""
-    collaborators = []
-    collaborators.append(
-        Employee(
+    collaborator = []
+    collaborator.append(
+        SalariedEmployee(
             1,
-            type=EmployeeType.SalariedEmployee,
             name="Luke Skywalker",
             monthly_salary=70000,
         )
     )
 
-    collaborators.append(
-        Employee(
+    collaborator.append(
+        SalariedEmployeeWithBonus(
             id=2,
-            type=EmployeeType.SalariedEmployeeWithBonus,
             name="Leia Skywalker",
             bonus=15000,
             monthly_salary=70000,
         )
     )
 
-    collaborators.append(
-        Employee(
+    collaborator.append(
+        TechRecruiter(
             id=3,
-            type=EmployeeType.TechRecruiter,
             name="Han Solo",
             monthly_salary=30000,
             commission=5000,
@@ -92,23 +47,22 @@ def get_collaborators():
         )
     )
 
-    collaborators.append(
-        Employee(
+    collaborator.append(
+        Freelancer(
             id=4,
-            type=EmployeeType.Freelancer,
             name="Chewbacca",
             rate=500,
             worked_hours=160,
         )
     )
 
-    return collaborators
+    return collaborator
 
 
 def main():
     print("Calculating total cost...")
     total = 0
-    for collaborator in get_collaborators():
+    for collaborator in get_collaborator():
         total += collaborator.salary()
 
     print(f"Total cost: {total}")
