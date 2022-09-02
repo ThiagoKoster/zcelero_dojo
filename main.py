@@ -1,8 +1,8 @@
 from models.employee import (
-    Freelancer,
-    SalariedEmployee,
-    SalariedEmployeeWithBonus,
-    TechRecruiter,
+    Bonus,
+    Commission,
+    Employee,
+    MonthlyContract,
 )
 
 """ 
@@ -21,38 +21,40 @@ def get_collaborator():
     """Mocks a database call."""
     collaborator = []
     collaborator.append(
-        SalariedEmployee(
+        Employee(
             1,
             name="Luke Skywalker",
-            monthly_salary=70000,
+            contract=MonthlyContract(conference=True, _salary=70000),
         )
     )
 
     collaborator.append(
-        SalariedEmployeeWithBonus(
+        Employee(
             id=2,
             name="Leia Skywalker",
-            bonus=15000,
-            monthly_salary=70000,
+            contract=MonthlyContract(
+                conference=True, _salary=70000, bonus=Bonus(15000)
+            ),
         )
     )
 
     collaborator.append(
-        TechRecruiter(
+        Employee(
             id=3,
             name="Han Solo",
-            monthly_salary=30000,
-            commission=5000,
-            recruited_candidates=5,
+            contract=MonthlyContract(
+                conference=False, _salary=30000, commission=Commission(5000, 5)
+            ),
         )
     )
 
     collaborator.append(
-        Freelancer(
-            id=4,
-            name="Chewbacca",
-            rate=500,
-            worked_hours=160,
+        Employee(
+            id=3,
+            name="Han Solo",
+            contract=MonthlyContract(
+                conference=False, _salary=30000, commission=Commission(5000, 5)
+            ),
         )
     )
 

@@ -1,45 +1,49 @@
 import pytest
 from models.employee import (
-    Freelancer,
-    SalariedEmployee,
-    SalariedEmployeeWithBonus,
-    TechRecruiter,
+    Employee,
+    Bonus,
+    HourlyContract,
+    MonthlyContract,
+    Commission,
 )
 
 
 @pytest.fixture
 def salaried_employee():
-    return SalariedEmployee(
+    return Employee(
         1,
         name="Luke Skywalker",
-        monthly_salary=70000,
+        contract=MonthlyContract(conference=True, salary=70000),
     )
 
 
 @pytest.fixture
 def salaried_employee_with_bonus():
-    return SalariedEmployeeWithBonus(
+    return Employee(
         id=2,
         name="Leia Skywalker",
-        bonus=15000,
-        monthly_salary=70000,
+        contract=MonthlyContract(conference=True, salary=70000, bonus=Bonus(15000)),
     )
 
 
 @pytest.fixture
 def tech_recruiter():
-    return TechRecruiter(
+    return Employee(
         id=3,
         name="Han Solo",
-        monthly_salary=30000,
-        commission=5000,
-        recruited_candidates=5,
+        contract=MonthlyContract(
+            conference=False, salary=30000, commission=Commission(5000, 5)
+        ),
     )
 
 
 @pytest.fixture
 def freelancer():
-    return Freelancer(id=4, name="Chewbacca", rate=500, worked_hours=160)
+    return Employee(
+        id=4,
+        name="Chewbacca",
+        contract=HourlyContract(conference=False, rate=500, worked_hours=160),
+    )
 
 
 def test_salaried_employee(salaried_employee):
