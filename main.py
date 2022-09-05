@@ -8,8 +8,6 @@ from enum import Enum
         - Receives a commision for each recruited_candidates
         - Receives a bonus
         - Can go to conferences
-
-    
 """
 
 
@@ -106,6 +104,8 @@ def get_collaborators():
 
 
 def main():
+    """Don't change this method"""
+
     print("Calculating total cost...")
     total = 0
     for collaborator in get_collaborators():
