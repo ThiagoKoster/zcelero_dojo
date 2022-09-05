@@ -112,6 +112,7 @@ def main():
         total += collaborator.salary()
 
     print(f"Total cost: {total}")
+    return total
 
 
 if __name__ == "__main__":
