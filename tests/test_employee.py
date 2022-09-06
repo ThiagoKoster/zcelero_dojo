@@ -1,12 +1,12 @@
 import pytest
-from main import Employee, EmployeeType
+from employee import Employee, EmployeeType
+from salaried_employee import SalariedEmployee
 
 
 @pytest.fixture
 def salaried_employee():
-    return Employee(
-        1,
-        type=EmployeeType.SalariedEmployee,
+    return SalariedEmployee(
+        id=1,
         name="Luke Skywalker",
         monthly_salary=70000,
     )
