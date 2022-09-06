@@ -1,6 +1,9 @@
 from dataclasses import dataclass
 from enum import Enum
-from employee import Employee, EmployeeType
+from freelancer import Freelancer
+from salaried_employee import SalariedEmployee
+from salaried_employee_with_bonus import SalariedEmployeeWithBonus
+from tech_recruiter import TechRecruiter
 
 """ 
     TODO: 1 - How can we remove duplicated code and split responsabilities?
@@ -16,18 +19,16 @@ def get_collaborators():
     """Mocks a database call."""
     collaborators = []
     collaborators.append(
-        Employee(
+        SalariedEmployee(
             1,
-            type=EmployeeType.SalariedEmployee,
             name="Luke Skywalker",
             monthly_salary=70000,
         )
     )
 
     collaborators.append(
-        Employee(
+        SalariedEmployeeWithBonus(
             id=2,
-            type=EmployeeType.SalariedEmployeeWithBonus,
             name="Leia Skywalker",
             bonus=15000,
             monthly_salary=70000,
@@ -35,9 +36,8 @@ def get_collaborators():
     )
 
     collaborators.append(
-        Employee(
+        TechRecruiter(
             id=3,
-            type=EmployeeType.TechRecruiter,
             name="Han Solo",
             monthly_salary=30000,
             commission=5000,
@@ -46,9 +46,8 @@ def get_collaborators():
     )
 
     collaborators.append(
-        Employee(
+        Freelancer(
             id=4,
-            type=EmployeeType.Freelancer,
             name="Chewbacca",
             rate=500,
             worked_hours=160,

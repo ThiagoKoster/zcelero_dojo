@@ -1,6 +1,8 @@
 import pytest
-from employee import Employee, EmployeeType
+from freelancer import Freelancer
 from salaried_employee import SalariedEmployee
+from salaried_employee_with_bonus import SalariedEmployeeWithBonus
+from tech_recruiter import TechRecruiter
 
 
 @pytest.fixture
@@ -14,9 +16,8 @@ def salaried_employee():
 
 @pytest.fixture
 def salaried_employee_with_bonus():
-    return Employee(
+    return SalariedEmployeeWithBonus(
         id=2,
-        type=EmployeeType.SalariedEmployeeWithBonus,
         name="Leia Skywalker",
         bonus=15000,
         monthly_salary=70000,
@@ -25,9 +26,8 @@ def salaried_employee_with_bonus():
 
 @pytest.fixture
 def tech_recruiter():
-    return Employee(
+    return TechRecruiter(
         id=3,
-        type=EmployeeType.TechRecruiter,
         name="Han Solo",
         monthly_salary=30000,
         commission=5000,
@@ -37,9 +37,7 @@ def tech_recruiter():
 
 @pytest.fixture
 def freelancer():
-    return Employee(
-        id=4, type=EmployeeType.Freelancer, name="Chewbacca", rate=500, worked_hours=160
-    )
+    return Freelancer(id=4, name="Chewbacca", rate=500, worked_hours=160)
 
 
 def test_salaried_employee(salaried_employee):
